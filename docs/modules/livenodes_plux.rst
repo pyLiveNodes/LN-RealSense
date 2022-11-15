@@ -1,29 +1,29 @@
-livenodes\_plux package
+livenodes\_realsense package
 =======================
 
 Submodules
 ----------
 
-livenodes\_plux.in\_biosignalsplux module
+livenodes\_realsense.in\_biosignalsrealsense module
 -----------------------------------------
 
-.. automodule:: livenodes_plux.in_biosignalsplux
+.. automodule:: livenodes_realsense.in_biosignalsrealsense
    :members:
    :undoc-members:
    :show-inheritance:
 
-livenodes\_plux.in\_muscleban module
+livenodes\_realsense.in\_muscleban module
 ------------------------------------
 
-.. automodule:: livenodes_plux.in_muscleban
+.. automodule:: livenodes_realsense.in_muscleban
    :members:
    :undoc-members:
    :show-inheritance:
 
-livenodes\_plux.in\_riot module
+livenodes\_realsense.in\_riot module
 -------------------------------
 
-.. automodule:: livenodes_plux.in_riot
+.. automodule:: livenodes_realsense.in_riot
    :members:
    :undoc-members:
    :show-inheritance:
@@ -31,7 +31,7 @@ livenodes\_plux.in\_riot module
 Module contents
 ---------------
 
-.. automodule:: livenodes_plux
+.. automodule:: livenodes_realsense
    :members:
    :undoc-members:
    :show-inheritance:

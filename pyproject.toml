@@ -18,9 +18,9 @@ dependencies = [
 ]
 
 [project.entry-points."livenodes.nodes"]
-in_realsense = "livenodes_plux.in_realsense:In_realsense"
-draw_realsense = "livenodes_plux.draw_realsense:draw_realsense"
-# out_realsense_hdf = "livenodes_plux.out_realsense_hdf:out_realsense_hdf"
+in_realsense = "livenodes_realsense.in_realsense:In_realsense"
+draw_realsense = "livenodes_realsense.draw_realsense:draw_realsense"
+# out_realsense_hdf = "livenodes_realsense.out_realsense_hdf:out_realsense_hdf"
 
 
 [project.optional-dependencies]

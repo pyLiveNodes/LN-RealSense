@@ -7,8 +7,8 @@ import pytest
 
 @pytest.fixture
 def discovered_modules():
-    exclude = ['__init__', 'utils']
-    modules = glob.glob(join(dirname(__file__), '../src/livenodes_plux/', "*.py"))
+    exclude = ['__init__', 'utils', 'ports']
+    modules = glob.glob(join(dirname(__file__), '../src/livenodes_realsense/', "*.py"))
     names = [basename(f)[:-3] for f in modules if isfile(f)]
     return [f for f in names if not f in exclude]
 
@@ -23,9 +23,9 @@ class TestProcessing():
         assert set(discovered_modules) <= set(livnodes_entrypoints)
 
     def test_loads_class(self):
-        in_riot = [x.load() for x in entry_points()['livenodes.nodes'] if x.name == 'in_riot'][0]
-        from livenodes_plux.in_riot import In_riot
-        assert In_riot == in_riot
+        in_realsense = [x.load() for x in entry_points()['livenodes.nodes'] if x.name == 'in_realsense'][0]
+        from livenodes_realsense.in_realsense import In_realsense
+        assert in_realsense == In_realsense
 
     def test_all_loadable(self):
         for x in entry_points()['livenodes.nodes']:
