@@ -1,5 +1,7 @@
 from livenodes.producer_blocking import Producer_Blocking
-from livenodes_core_nodes.ports import Ports_empty, Ports_data
+
+from livenodes_core_nodes.ports import Ports_empty
+from .ports import Ports_video
 
 import pyrealsense2 as rs
 import numpy as np
@@ -14,7 +16,7 @@ class In_realsense(Producer_Blocking):
     """
 
     ports_in = Ports_empty()
-    ports_out = Ports_data()
+    ports_out = Ports_video()
 
     category = "Data Source"
     description = ""
@@ -98,4 +100,4 @@ class In_realsense(Producer_Blocking):
 
             # Convert images to numpy arrays
             depth_image = np.asanyarray(depth_frame.get_data(), dtype=np.int16)
-            self._emit_data(depth_image, channel=self.ports_out.data)
+            self._emit_data(depth_image, channel=self.ports_out.video)
