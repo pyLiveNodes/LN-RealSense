@@ -1,0 +1,46 @@
+[project]
+name = "Livenodes-RealSense"
+dynamic = ['version']
+description = "LiveNodes: node based live streaming sensor/data and visualization suite."
+authors = [
+    { name = "Yale Hartmann", email = "yale.hartmann@uni-bremen.de" }
+]
+# TODO: figure out how/if to add livenodes here... for now install manually in venv via:
+# pip install . --extra-index-url https://package_puller:8qYs4hBAsmAHJ5AdS_y9@gitlab.csl.uni-bremen.de/api/v4/groups/368/-/packages/pypi/simple
+# pip install -e . --extra-index-url https://package_puller:8qYs4hBAsmAHJ5AdS_y9@gitlab.csl.uni-bremen.de/api/v4/groups/368/-/packages/pypi/simple
+dependencies = [
+    "livenodes>=0.9b1",
+    "livenodes-core-nodes>=0.9b1",
+    "livenodes-qt>=0.9b1",
+    "numpy>=1.22.1",
+    "opencv-python>=4.6.0.66"
+]
+
+[project.entry-points."livenodes.nodes"]
+in_realsense = "livenodes_plux.in_realsense:In_realsense"
+draw_realsense = "livenodes_plux.draw_realsense:draw_realsense"
+# out_realsense_hdf = "livenodes_plux.out_realsense_hdf:out_realsense_hdf"
+
+
+[project.optional-dependencies]
+dev = [
+    "tox",
+    "pytest>=7.0.1"
+]
+
+[build-system]
+requires = [
+    "setuptools>=48",
+    "wheel",
+    "setuptools_scm >= 2.0.0, <3",
+    "setuptools-git-versioning"
+]
+build-backend = 'setuptools.build_meta'
+
+[tool.setuptools-git-versioning]
+enabled = true
+
+[tool.black]
+line-length = 140
+target-version = ['py36']
+skip-string-normalization = true
