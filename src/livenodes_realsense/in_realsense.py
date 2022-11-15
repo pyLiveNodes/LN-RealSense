@@ -6,11 +6,11 @@ import numpy as np
 
 class In_realsense(Producer_Blocking):
     """
-    Feeds data frames from a biosiagnal plux based device into the pipeline.
+    Feeds data frames from a biosiagnal realsense based device into the pipeline.
 
-    Examples for biosignal plux devices are: biosignalplux hup and muscleban (for RIoT and Bitalino please have a look at in_riot.py)
+    Examples for biosignal realsense devices are: biosignalrealsense hup and muscleban (for RIoT and Bitalino please have a look at in_riot.py)
 
-    Requires the plux libaray.
+    Requires the realsense libaray.
     """
 
     ports_in = Ports_empty()
