@@ -24,7 +24,8 @@ in_realsense_colorised = "livenodes_realsense.in_realsense_colorised:In_realsens
 draw_image_depth = "livenodes_realsense.draw_image_depth:Draw_image_depth"
 draw_image_rgb = "livenodes_realsense.draw_image_rgb:Draw_image_rgb"
 in_colorised = "livenodes_realsense.in_colorised:In_colorised"
-out_colorised = "livenodes_realsense.out_colorised:out_colorised"
+out_colorised = "livenodes_realsense.out_colorised:Out_colorised"
+playback_colorised = "livenodes_realsense.playback_colorised:Playback_colorised"
 
 [project.optional-dependencies]
 dev = [

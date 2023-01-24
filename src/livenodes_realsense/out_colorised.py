@@ -7,7 +7,7 @@ from livenodes.node import Node
 
 from .ports import Ports_image_rgb, Ports_empty
 
-class Out_colorized(Node):
+class Out_colorised(Node):
     ports_in = Ports_image_rgb()
     ports_out = Ports_empty()
 
