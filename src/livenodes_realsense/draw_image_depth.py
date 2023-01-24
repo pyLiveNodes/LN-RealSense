@@ -5,11 +5,11 @@ from PyQt5.QtGui import QPixmap
 from PyQt5 import QtCore
 
 from livenodes_core_nodes.ports import Ports_empty
-from .ports import Ports_depth_video
+from .ports import Ports_image_depth
 
 from livenodes.viewer import View_QT
 
-class Draw_realsense(View_QT):
+class Draw_image_depth(View_QT):
     """
     Draw all the first two received data channels as heat plot.
     
@@ -18,30 +18,15 @@ class Draw_realsense(View_QT):
     Draws on a qt canvas.
     """
 
-    ports_in = Ports_depth_video()
+    ports_in = Ports_image_depth()
     ports_out = Ports_empty()
 
     category = "Draw"
     description = ""
 
     example_init = {
-        "name": "Video Render",
+        "name": "Image Render",
     }
-
-    def __init__(self,
-                name="Video Render",
-                 **kwargs):
-        super().__init__(name=name, **kwargs)
-        self.name = name
-
-    def _settings(self):
-        """
-        Get the Nodes setup settings.
-        Primarily used for serialization from json files.
-        """
-        return { \
-            "name": self.name
-        }
 
     def _init_draw(self, parent):
         """
@@ -55,17 +40,13 @@ class Draw_realsense(View_QT):
         self.frame_label.setAlignment(QtCore.Qt.AlignCenter)
 
         def update(data=[]):
-            playback_colormap = self.convert_cv_to_qt(data[0])
+            playback_colormap = self.convert_cv_to_qt(data)
             self.frame_label.setPixmap(playback_colormap)
 
         return update
 
-    def _should_process(self, depth=None):
-        return depth is not None
-        
-    # data should follow the (batch/file, time, channel) format
-    def process(self, depth,  **kwargs):  
-        self._emit_draw(data=depth)
+    def process(self, depth_image,  **kwargs):  
+        self._emit_draw(data=depth_image)
 
     def convert_cv_to_qt(self, cv_img):
         """

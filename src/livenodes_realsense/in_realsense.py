@@ -1,7 +1,7 @@
 from livenodes.producer_blocking import Producer_Blocking
 
 from livenodes_core_nodes.ports import Ports_empty
-from .ports import Ports_video
+from .ports import Ports_image_depth
 
 import pyrealsense2 as rs
 import numpy as np
@@ -16,7 +16,7 @@ class In_realsense(Producer_Blocking):
     """
 
     ports_in = Ports_empty()
-    ports_out = Ports_video()
+    ports_out = Ports_image_depth()
 
     category = "Data Source"
     description = ""
@@ -82,7 +82,7 @@ class In_realsense(Producer_Blocking):
         self.config.enable_stream(rs.stream.depth, self.width, self.height, rs.format.z16, self.fps)
 
 
-    def _onstart(self):
+    def _blocking_onstart(self):
         """
         Streams the data and calls frame callbacks for each frame.
         """
@@ -93,11 +93,11 @@ class In_realsense(Producer_Blocking):
         
         while self.run:
             # Wait for a coherent pair of frames: depth and color
-            # yh: called frames as this might be multiple streams, but only retrives one time frame
+            # yh: called "frames" as this might be multiple streams, but only retrives one time frame
             # streams = queue.wait_for_frame()
-            streams = self.pipeline.wait_for_frames()
+            streams = self.pipeline.wait_for_frames() # blocking, TODO: add timeout, such that the outer function can return even if this blocks forever (because no frame is received)
             depth_frame = streams.get_depth_frame()
 
             # Convert images to numpy arrays
             depth_image = np.asanyarray(depth_frame.get_data(), dtype=np.int16)
-            self._emit_data(depth_image, channel=self.ports_out.video)
+            self.msgs.put_nowait((depth_image, "depth_image", True))

@@ -1,9 +1,11 @@
-from livenodes_core_nodes.ports import Port_Data
+from livenodes_core_nodes.ports import Port_TS_Int, Port_List, Port_Matrix_Int
 from typing import NamedTuple
 
-class Ports_video(NamedTuple):
-    video: Port_Data = Port_Data("Video")
 
-class Ports_depth_video(NamedTuple):
-    # (Time, Widht, Height)
-    depth: Port_Data = Port_Data("Depth")
+class Ports_image_rgb(NamedTuple):
+    # (Width, Height, RGB), is somewhat similar to (batch, time, channel)
+    image_color: Port_TS_Int = Port_TS_Int("Image")
+
+class Ports_image_depth(NamedTuple):
+    # (Widht, Height)
+    image_depth: Port_Matrix_Int = Port_Matrix_Int("Depth Image")
