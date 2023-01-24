@@ -11,7 +11,7 @@ authors = [
 dependencies = [
     "livenodes>=0.9.1b1",
     "livenodes-core-nodes>=0.9.1b1",
-    "livenodes-qt>=0.9b1",
+    "livenodes-qt>=0.9.1b1", # only depending on this, so we do not depend on qt directly, right?
     "numpy>=1.22.1",
     "opencv-python>=4.6.0.66",
     "pyrealsense2>=2.50.0.3812"
@@ -19,8 +19,11 @@ dependencies = [
 
 [project.entry-points."livenodes.nodes"]
 in_realsense = "livenodes_realsense.in_realsense:In_realsense"
-draw_realsense = "livenodes_realsense.draw_realsense:draw_realsense"
-# out_realsense_hdf = "livenodes_realsense.out_realsense_hdf:out_realsense_hdf"
+draw_realsense = "livenodes_realsense.draw_realsense:Draw_realsense"
+# draw_realsense_colorized = "livenodes_realsense.draw_realsense_colorized:Draw_realsense_colorized"
+# colorizer = "livenodes_realsense.colorizer:Colorizer"
+# out_realsense_hdf = "livenodes_realsense.out_realsense_hdf:Out_realsense_hdf"
+# out_realsense_mp4 = "livenodes_realsense.out_realsense_mp4:Out_realsense_mp4"
 
 
 [project.optional-dependencies]

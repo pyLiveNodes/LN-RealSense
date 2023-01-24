@@ -5,7 +5,7 @@ from PyQt5.QtGui import QPixmap
 from PyQt5 import QtCore
 
 from livenodes_core_nodes.ports import Ports_empty
-from .ports import Ports_video
+from .ports import Ports_depth_video
 
 from livenodes.viewer import View_QT
 
@@ -18,7 +18,7 @@ class Draw_realsense(View_QT):
     Draws on a qt canvas.
     """
 
-    ports_in = Ports_video()
+    ports_in = Ports_depth_video()
     ports_out = Ports_empty()
 
     category = "Draw"
@@ -60,12 +60,12 @@ class Draw_realsense(View_QT):
 
         return update
 
-    def _should_process(self, video=None):
-        return video is not None
+    def _should_process(self, depth=None):
+        return depth is not None
         
     # data should follow the (batch/file, time, channel) format
-    def process(self, video,  **kwargs):  
-        self._emit_draw(data=video)
+    def process(self, depth,  **kwargs):  
+        self._emit_draw(data=depth)
 
     def convert_cv_to_qt(self, cv_img):
         """
