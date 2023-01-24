@@ -7,7 +7,7 @@ import pytest
 
 @pytest.fixture
 def discovered_modules():
-    exclude = ['__init__', 'utils', 'ports']
+    exclude = ['__init__', 'utils', 'ports'] + ['in_realsense', 'in_realsense_colorised'] #for now exclude the in_realsense versions, as the test envrionment does not have librealsense installed...
     modules = glob.glob(join(dirname(__file__), '../src/livenodes_realsense/', "*.py"))
     names = [basename(f)[:-3] for f in modules if isfile(f)]
     return [f for f in names if not f in exclude]
