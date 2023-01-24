@@ -8,12 +8,9 @@ from .ports import Ports_image_rgb
 
 
 class Draw_image_rgb(Draw_image_depth):
-    """
-    Draw all the first two received data channels as heat plot.
-    
-    Time is represented via alpha values. The most current point is opaque the furthest point away is at 10% alpha.
+    """Draw rgb images on qt canvas.
 
-    Draws on a qt canvas.
+    Draws received single rgb image frames on a qt canvas.
     """
 
     ports_in = Ports_image_rgb()

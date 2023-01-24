@@ -9,6 +9,10 @@ from livenodes.producer import Producer_async
 from .ports import Ports_image_rgb, Ports_empty
 
 class Playback_colorised(Producer_async):
+    """Playback rgb images in normal/viewing time.
+
+    Feeds rgb images one by one with the videos' fps rate into the subsequent nodes.
+    """
     ports_in = Ports_empty()
     ports_out = Ports_image_rgb()
 

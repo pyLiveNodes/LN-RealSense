@@ -7,12 +7,11 @@ import pyrealsense2 as rs
 import numpy as np
 
 class In_realsense(Producer_Blocking):
-    """
-    Feeds data frames from a biosiagnal realsense based device into the pipeline.
+    """Realsense input, raw depth.
 
-    Examples for biosignal realsense devices are: biosignalrealsense hup and muscleban (for RIoT and Bitalino please have a look at in_riot.py)
+    Connects to a RealSense and feeds single depth images into subsequent nodes.
 
-    Requires the realsense libaray.
+    Requires librealsense and pyrealsense2 libaries.
     """
 
     ports_in = Ports_empty()

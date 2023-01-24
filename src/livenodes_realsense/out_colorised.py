@@ -8,6 +8,11 @@ from livenodes.node import Node
 from .ports import Ports_image_rgb, Ports_empty
 
 class Out_colorised(Node):
+    """Saves rgb images to .avi video files.
+
+    Expects single rgb images, which are saved lossless or lossy compressed into <folder><timestamp>.avi files.
+    """
+    
     ports_in = Ports_image_rgb()
     ports_out = Ports_empty()
 

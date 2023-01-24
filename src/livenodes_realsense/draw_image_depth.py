@@ -10,12 +10,9 @@ from .ports import Ports_image_depth
 from livenodes.viewer import View_QT
 
 class Draw_image_depth(View_QT):
-    """
-    Draw all the first two received data channels as heat plot.
-    
-    Time is represented via alpha values. The most current point is opaque the furthest point away is at 10% alpha.
+    """Draw raw depth images on qt canvas.
 
-    Draws on a qt canvas.
+    Draws received single raw depth image frames on a qt canvas.
     """
 
     ports_in = Ports_image_depth()

@@ -9,6 +9,10 @@ from livenodes.producer import Producer
 from .ports import Ports_image_rgb, Ports_empty
 
 class In_colorised(Producer):
+    """Reads rgb images from .avi video files.
+
+    Emits single rgb images from compressed .avi files.
+    """
     ports_in = Ports_empty()
     ports_out = Ports_image_rgb()
 

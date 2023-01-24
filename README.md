@@ -1,9 +1,25 @@
 # Livenodes RealSense
 
+Livenodes Package to interface the intel realsense cameras, namely the d435.
+
 Requires installed librealsense and ffmpeg.
 
-## Prerequisits: librealsense
+The package provides both interfaces for raw depth recording and colorized depth recording.
+However, the focus lies on the latter one. The package roughly provides these nodes:
+- RealSense input Node: connects to a realsense and forwards single images
+- Out Node: takes an image stream and saves it to .avi either lossless or lossy compressed
+- In Node: read .avi files and forward single images
+- Playback Node: read .avi files and forward single images in the correct fps
+- Draw Node: takes an image stream and draws them one after the other on a qt canvas
 
+## Next Steps
+- Consider implementing nodes such that they may receive and send batched images? 
+    -> this might provide some performance gains, especially if added with specific video livenodes.bridges that utilize temporary compression over network
+- Consider adding interfaces/converters to popular image/video processing libraries
+- Consider adding interfaces/converters to ml applications
+
+
+## Prerequisits: librealsense
 Ubuntu:
 - Install Intel RealSense SDK 2.0 (https://github.com/IntelRealSense/librealsense/releases/tag/v2.50.0)
     - Note: while there might be an issue with the amazon server, the installation might very well work.
