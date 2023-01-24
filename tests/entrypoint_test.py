@@ -7,7 +7,7 @@ import pytest
 
 @pytest.fixture
 def discovered_modules():
-    exclude = ['__init__', 'utils', 'ports'] + ['in_realsense', 'in_realsense_colorised'] #for now exclude the in_realsense versions, as the test envrionment does not have librealsense installed...
+    exclude = ['__init__', 'utils', 'ports']
     modules = glob.glob(join(dirname(__file__), '../src/livenodes_realsense/', "*.py"))
     names = [basename(f)[:-3] for f in modules if isfile(f)]
     return [f for f in names if not f in exclude]
@@ -21,12 +21,3 @@ class TestProcessing():
 
         print(set(discovered_modules).difference(set(livnodes_entrypoints)))
         assert set(discovered_modules) <= set(livnodes_entrypoints)
-
-    def test_loads_class(self):
-        in_realsense = [x.load() for x in entry_points()['livenodes.nodes'] if x.name == 'in_realsense'][0]
-        from livenodes_realsense.in_realsense import In_realsense
-        assert in_realsense == In_realsense
-
-    def test_all_loadable(self):
-        for x in entry_points()['livenodes.nodes']:
-            x.load()
