@@ -5,7 +5,8 @@ import imageio as iio
 
 from livenodes.node import Node
 
-from .ports import Ports_image_rgb, Ports_empty
+from .ports import Ports_image_rgb
+from livenodes_core_nodes.ports import Ports_empty
 
 class Out_colorised(Node):
     """Saves rgb images to .avi video files.

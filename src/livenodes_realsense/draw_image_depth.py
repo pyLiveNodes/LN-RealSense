@@ -4,8 +4,8 @@ from PyQt5 import QtGui
 from PyQt5.QtGui import QPixmap
 from PyQt5 import QtCore
 
-from livenodes_core_nodes.ports import Ports_empty
 from .ports import Ports_image_depth
+from livenodes_core_nodes.ports import Ports_empty
 
 from livenodes.viewer import View_QT
 

@@ -1,4 +1,4 @@
-from livenodes_core_nodes.ports import Port_TS_Int, Port_List, Port_Matrix_Int
+from livenodes_core_nodes.ports import Port_TS_Int, Port_Matrix_Int
 from typing import NamedTuple
 
 
