@@ -2,7 +2,7 @@
 
 Livenodes Package to interface the intel realsense cameras, namely the d435.
 
-Requires installed librealsense and ffmpeg.
+IMPORTANT: Requires installed librealsense and ffmpeg.
 
 The package provides both interfaces for raw depth recording and colorized depth recording.
 However, the focus lies on the latter one. The package roughly provides these nodes:

@@ -42,8 +42,6 @@ class In_realsense(Producer_Blocking):
         self.fps = fps
         self.options = options
 
-        self.run = True
-
     def _settings(self):
         return {\
             "width": self.width,
@@ -51,10 +49,6 @@ class In_realsense(Producer_Blocking):
             "fps": self.fps,
             "options": self.options
         }
-
-    def _onstop(self):
-        self.run = False
-        self.pipeline.stop()
 
     def setup(self):
         ### --- Setup RealSense connection ----------------------------------------
@@ -81,7 +75,7 @@ class In_realsense(Producer_Blocking):
         self.config.enable_stream(rs.stream.depth, self.width, self.height, rs.format.z16, self.fps)
 
 
-    def _blocking_onstart(self):
+    def _blocking_onstart(self, stop_event):
         """
         Streams the data and calls frame callbacks for each frame.
         """
@@ -90,7 +84,7 @@ class In_realsense(Producer_Blocking):
 
         self.pipeline.start(self.config)
         
-        while self.run:
+        while not stop_event.is_set():
             # Wait for a coherent pair of frames: depth and color
             # yh: called "frames" as this might be multiple streams, but only retrives one time frame
             # streams = queue.wait_for_frame()
@@ -98,5 +92,7 @@ class In_realsense(Producer_Blocking):
             depth_frame = streams.get_depth_frame()
 
             # Convert images to numpy arrays
-            depth_image = np.asanyarray(depth_frame.get_data(), dtype=np.int16)
-            self.msgs.put_nowait((depth_image, "depth_image", True))
+            image_depth = np.asanyarray(depth_frame.get_data(), dtype=np.int16)
+            self.msgs.put_nowait((image_depth, "image_depth", True))
+
+        self.pipeline.stop()

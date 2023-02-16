@@ -2,7 +2,7 @@ from functools import reduce
 import numpy as np
 from glob import glob
 import random
-import imageio as iio
+import imageio.v2 as iio
 
 from livenodes.producer import Producer
 

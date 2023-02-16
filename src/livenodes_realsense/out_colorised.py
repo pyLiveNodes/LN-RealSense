@@ -1,7 +1,9 @@
 import time
 import datetime
 import os
-import imageio as iio
+import imageio.v2 as iio
+import numpy as np
+import cv2
 
 from livenodes.node import Node
 
@@ -20,13 +22,14 @@ class Out_colorised(Node):
     category = "Save"
     description = ""
 
-    example_init = {'name': 'Save', 'folder': './data/Debug/', "lossless": True}
+    example_init = {'name': 'Save', 'folder': './data/Debug/', "fps":30, "lossless": True}
 
-    def __init__(self, folder, lossless=True, name="Save", **kwargs):
+    def __init__(self, folder, lossless=True, fps=30, name="Save", **kwargs):
         super().__init__(name, **kwargs)
 
         self.folder = folder
         self.lossless = lossless
+        self.fps = fps
 
         if not os.path.exists(self.folder):
             os.makedirs(self.folder)
@@ -40,17 +43,18 @@ class Out_colorised(Node):
     def _settings(self):
         return {\
             "folder": self.folder,
-            "lossless": self.lossless
+            "lossless": self.lossless,
+            "fps": self.fps
         }
 
     def _onstart(self):
         if self.writer is None:
             if self.lossless:
-                self.writer = iio.get_writer(self.save_loc, fps=self.fps, mode="I", format='FFMPEG', quality=None, codec="libx264rgb", pixelformat="rgb24", output_params=['-crf', '0', # Ensure setting crf to 0
+                self.writer = iio.get_writer(self.save_loc, fps=self.fps, mode="I", format='FFMPEG', quality=None, codec="libx264rgb", pixelformat="rgb8", output_params=['-crf', '0', # Ensure setting crf to 0
                                 '-preset', 'ultrafast']) # Maximum compression: veryslow, 
                                                         # maximum speed: ultrafast)
             else:
-                self.writer = iio.get_writer(self.save_loc, fps=self.fps, mode="I", format='FFMPEG', quality=10, codec="libx264rgb", pixelformat="rgb24")
+                self.writer = iio.get_writer(self.save_loc, fps=self.fps, mode="I", format='FFMPEG', quality=10, codec="libx264rgb", pixelformat="rgb8")
 
             self.info('Created writer')
 
@@ -60,4 +64,19 @@ class Out_colorised(Node):
             self.writer = None
 
     def process(self, image_color, **kwargs):
-        self.writer.append_data(image_color)
+        # Assume for now, that the image is int8, ie from the in_colorised node
+        # we'll need to convert it to unsigned for the writer
+        d = np.array(image_color)
+        # d = cv2.cvtColor(np.array(image_color), cv2.COLOR_BGR2RGB)
+
+        # print(np.min(d), np.max(d), d.shape)
+        assert d.dtype == np.int8
+        
+        # TODO: figure out why the written out video file has wrong colors...
+        # tmp = np.copy(d[:,:,1])
+        # d[:,:,1] = d[:,:,2]
+        # d[:,:,2] = tmp
+
+        # slightly crazy/awesome, that the d + 128 works and automatically converts to np.int16, which we can than losslessly convert to uin18
+        d = d + 128
+        self.writer.append_data(d.astype(np.uint8))

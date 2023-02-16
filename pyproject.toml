@@ -15,7 +15,8 @@ dependencies = [
     "numpy>=1.22.1",
     "opencv-python>=4.6.0.66",
     "pyrealsense2>=2.50.0.3812",
-    "imageio"
+    "imageio",
+    "imageio[ffmpeg]"
 ]
 
 [project.entry-points."livenodes.nodes"]

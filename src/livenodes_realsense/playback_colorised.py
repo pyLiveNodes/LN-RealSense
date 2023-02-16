@@ -1,6 +1,6 @@
 from glob import glob
 import random
-import imageio as iio
+import imageio.v3 as iio
 import time
 import asyncio
 
@@ -22,8 +22,8 @@ class Playback_colorised(Producer_async):
     description = ""
 
     example_init = {
-        "files": "./files/**.h5",
-        "files_exclude": './files/part0*.h5',
+        "files": "./data/realsense/**.avi",
+        "files_exclude": '',
         "name": "Data input",
         "shuffle": True,
     }
@@ -60,10 +60,10 @@ class Playback_colorised(Producer_async):
         last_time = time.time()
 
         for file_name in fs:
-            sleep_time = 1.0/iio.immeta(file_name, plugin="ffmpeg")["fps"]
+            sleep_time = 1.0/iio.immeta(file_name)["fps"]
             
             # iterate over large videos
-            for frame in iio.imiter(file_name, plugin="ffmpeg"):
+            for frame in iio.imiter(file_name):
                 while time.time() < last_time + sleep_time + 0.0001:
                     await asyncio.sleep(0.0001)
 
