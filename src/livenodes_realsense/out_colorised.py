@@ -3,7 +3,6 @@ import datetime
 import os
 import imageio.v2 as iio
 import numpy as np
-import cv2
 
 from livenodes.node import Node
 
