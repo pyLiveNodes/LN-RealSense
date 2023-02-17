@@ -67,16 +67,5 @@ class Out_colorised(Node):
         # Assume for now, that the image is int8, ie from the in_colorised node
         # we'll need to convert it to unsigned for the writer
         d = np.array(image_color)
-        # d = cv2.cvtColor(np.array(image_color), cv2.COLOR_BGR2RGB)
-
-        # print(np.min(d), np.max(d), d.shape)
         assert d.dtype == np.int8
-        
-        # TODO: figure out why the written out video file has wrong colors...
-        # tmp = np.copy(d[:,:,1])
-        # d[:,:,1] = d[:,:,2]
-        # d[:,:,2] = tmp
-
-        # slightly crazy/awesome, that the d + 128 works and automatically converts to np.int16, which we can than losslessly convert to uin18
-        d = d + 128
         self.writer.append_data(d.astype(np.uint8))
