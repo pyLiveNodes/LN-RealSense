@@ -1,4 +1,4 @@
-# Livenodes
+# LN RealSense
 
 ```{eval-rst}
 .. toctree::
