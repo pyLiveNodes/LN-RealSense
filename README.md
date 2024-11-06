@@ -1,3 +1,6 @@
+[![Format and Test](https://github.com/pyLiveNodes/LN-RealSense/actions/workflows/format_test.yml/badge.svg)](https://github.com/pyLiveNodes/LN-RealSense/actions/workflows/format_test.yml)
+[![Publish](https://github.com/pyLiveNodes/LN-RealSense/actions/workflows/publish.yml/badge.svg)](https://github.com/pyLiveNodes/LN-RealSense/actions/workflows/publish.yml)
+
 # Livenodes RealSense
 
 Livenodes Package to interface the intel realsense cameras, namely the d435.
